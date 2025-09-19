@@ -41,10 +41,16 @@ public class Rascunho{
         } else {
             System.out.printf("ID: %d | Produto: %s | Preço: R$ %.2f | Estoque: Esgotado\n", idsProdutos[i], nomesProdutos[i], precoProdutos[i]);
         }
-    public static void adicionarItemVenda(int[] idsProdutos, String[] nomesProdutos, double[] precoProdutos, int[] estoquesProdutos, int[] vendaAtualIds, int[] vendaAtualQuantidades) {
+    public static void adicionarItemVenda(int[] idsProdutos, String[] nomesProdutos, double[] precoProdutos, int[] estoquesProdutos, int[] vendaAtuallds, int[] vendaAtualQuantidades) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite o ID do produto que deseja adicionar à venda: ");
         int idProduto = scanner.nextInt();
+        for(i=0,i<=2,++){
+            if(idProduto == idProdutos[i]){
+                float precoAtual == precoProdutos[i]
+            }
+
+        }
         System.out.print("Digite a quantidade do produto: ");
         int quantidade = scanner.nextInt();
         if(quantidade <= 0) {
@@ -53,13 +59,19 @@ public class Rascunho{
         }else if(quantidade > estoquesProdutos[i]) {
             System.out.println("Quantidade indisponível em estoque.");
             return;
-        }else if(idProduto not in idsProdutos) {
+        }else if(!idsProdutos.contains(idProduto)) {
             System.out.println("ID de produto inválido.");
             return;
         } else {
-            vendaAtualIds[i] = idProduto;
+            precoAtual = precoAtual*quantidade;
+            vendaAtuallds[i] = idProduto;
             vendaAtualQuantidades[i] = quantidade;
             System.out.println("Item adicionado à venda com sucesso.");
         }
-
+    }
+    public static void verResumoVendaAtual(int[] vendaAtualIds, int[] vendaAtualQuantidades, float precoAtual){
+        for(i=0,i<=2,++){
+            if()
+        }
+    }
 }
