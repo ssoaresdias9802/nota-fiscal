@@ -47,8 +47,11 @@ public class Rascunho{
         int idProduto = scanner.nextInt();
         for(i=0,i<=2,++){
             if(idProduto == idProdutos[i]){
-                float precoAtual == precoProdutos[i]
+                float precoAtual == precoProdutos[i];
+                String[] = produtos;
+                String produtos = nomesProdutos[i];
             }
+                
 
         }
         System.out.print("Digite a quantidade do produto: ");
@@ -69,9 +72,8 @@ public class Rascunho{
             System.out.println("Item adicionado à venda com sucesso.");
         }
     }
-    public static void verResumoVendaAtual(int[] vendaAtualIds, int[] vendaAtualQuantidades, float precoAtual){
-        for(i=0,i<=2,++){
-            if()
+    public static void verResumoVendaAtual(int[] vendaAtualIds, int[] vendaAtualQuantidades, float precoAtual, String[] produtos ){
+        System.out.printf("Produtos: %d, Quantidade: %f, IDs: %i, Valor: %f", produtos, vendaAtualQuantidades , vendaAtualIds, precoAtual);
         }
     }
 }
