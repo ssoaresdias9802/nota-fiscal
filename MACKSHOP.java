@@ -327,39 +327,52 @@ public class MACKSHOP {
     }
 
     // ===== Nota fiscal =====
-    public static void imprimirNotaFiscal(int idPedido, double total) {
-        LocalDateTime agora = LocalDateTime.now(); // Data e hora atual
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); // Formato da data
+public static void imprimirNotaFiscal(int idPedido, double total) {
+    LocalDateTime agora = LocalDateTime.now(); // Data e hora atual
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); // Formato da data/hora
 
-        System.out.println("*********************************************************************************************");
-        System.out.printf("* NOTA FISCAL - VENDA AO CONSUMIDOR | Pedido ID: %d | Data: %s\n", idPedido, agora.format(fmt));
-        System.out.println("*********************************************************************************************");
+    // Cabeçalho da nota fiscal
+    System.out.println("*********************************************************************************************");
+    System.out.println("* MACKSHOP                                                                                 *");
+    System.out.println("* CNPJ: 12.345.678/0001-99                                                                  *");
+    System.out.println("*********************************************************************************************");
+    System.out.println("* NOTA FISCAL - VENDA AO CONSUMIDOR                                                        *");
+    System.out.printf("* Pedido ID: %d                                                                           *\n", idPedido);
+    System.out.printf("* Data de Emissão: %s                                                      *\n", agora.format(fmt));
+    System.out.println("*********************************************************************************************");
 
-        double subtotal = 0; // Inicializa subtotal
-        // Percorre itens do pedido
-        for (int i = 0; i < historicoItensCont; i++) {
-            if (historicoItensVendidos[i][0] == idPedido) {
-                int id = historicoItensVendidos[i][1];
-                int qtd = historicoItensVendidos[i][2];
-                int pos = buscarPosicaoProduto(id); // Busca posição do produto
-                double valorUnitario = precoProdutos[pos];
-                double valorTotal = valorUnitario * qtd;
-                subtotal += valorTotal;
-                System.out.printf("* ID Produto: %d | Nome: %-16s | Qtd: %d | Unit: R$ %.2f | Total: R$ %.2f\n",
-                        id, nomesProdutos[pos], qtd, valorUnitario, valorTotal);
-            }
+    // Cabeçalho da tabela de itens
+    System.out.println("* # | ID   | DESCRIÇÃO         | QTD | VL. UNIT. | VL. TOTAL                               *");
+    System.out.println("-----------------------------------------------------------------------------------------------------------");
+
+    double subtotal = 0; // Inicializa subtotal
+    int count = 1;       // Numeração dos itens
+
+    // Percorre todos os itens vendidos e imprime linhas da tabela
+    for (int i = 0; i < historicoItensCont; i++) {
+        if (historicoItensVendidos[i][0] == idPedido) { // Verifica se o item pertence ao pedido
+            int idProduto = historicoItensVendidos[i][1];
+            int qtd = historicoItensVendidos[i][2];
+
+            // Busca posição do produto nos arrays
+            int pos = buscarPosicaoProduto(idProduto);
+
+            double valorUnitario = precoProdutos[pos];
+            double valorTotalItem = valorUnitario * qtd;
+            subtotal += valorTotalItem; // Atualiza subtotal
+
+            // Imprime linha do item formatada com colunas alinhadas
+            System.out.printf("* %d | %d | %-16s | %3d | R$ %7.2f | R$ %7.2f\n",
+                    count++, idProduto, nomesProdutos[pos], qtd, valorUnitario, valorTotalItem);
         }
-        System.out.printf("* TOTAL DA VENDA: R$ %.2f\n", total);
-        System.out.println("*********************************************************************************************");
     }
 
-    // ===== Método auxiliar para buscar posição do produto =====
-    public static int buscarPosicaoProduto(int idProduto) {
-        for (int i = 0; i < idsProdutos.length; i++) {
-            if (idsProdutos[i] == idProduto) {
-                return i; // Retorna posição se encontrado
-            }
-        }
-        return -1; // Retorna -1 se não encontrado
-    }
+    System.out.println("-----------------------------------------------------------------------------------------------------------");
+    // Exibe subtotal e total
+    System.out.printf("* SUBTOTAL | R$ %.2f\n", subtotal);
+    System.out.printf("* TOTAL    | R$ %.2f\n", subtotal); // Total igual ao subtotal
+    System.out.println("*********************************************************************************************");
+    System.out.println("* OBRIGADO PELA PREFERÊNCIA! VOLTE SEMPRE!                                                 *");
+    System.out.println("*********************************************************************************************");
+}
 }
