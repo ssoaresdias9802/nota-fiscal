@@ -27,8 +27,16 @@ public class MACKSHOP {
     // ===== Método principal =====
     public static void main(String[] args) {
         exibirMenu();  // Chama o método que exibe o menu principal
+    }   
+     // ===== Método auxiliar para buscar posição do produto =====
+    public static int buscarPosicaoProduto(int idProduto) {
+        for (int i = 0; i < idsProdutos.length; i++) {
+            if (idsProdutos[i] == idProduto) {
+                return i; // Retorna posição se encontrado
+            }
+        }
+        return -1; // Retorna -1 se não encontrado
     }
-
     // ===== Menu principal =====
     public static void exibirMenu() {
         Scanner entrada = new Scanner(System.in); // Scanner para ler opções do usuário
